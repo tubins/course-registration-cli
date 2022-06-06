@@ -1,14 +1,17 @@
 package com.preservica.cli.controller;
 
+import com.preservica.cli.service.StudentService;
 import com.preservica.cli.service.UserInputService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class StudentsMenuController {
     private final UserInputService userInputService;
+    private final StudentService studentService;
 
-    public StudentsMenuController(UserInputService userInputService) {
+    public StudentsMenuController(UserInputService userInputService, StudentService studentService) {
         this.userInputService = userInputService;
+        this.studentService = studentService;
     }
 
     public void run() {
@@ -18,10 +21,12 @@ public class StudentsMenuController {
             case "n":
             case "N":
                 System.out.println("New Students option selected.");
+                studentService.saveStudent();
                 break;
             case "l":
             case "L":
                 System.out.println("List Students Option selected.");
+                studentService.listAll();
                 break;
             case "a":
             case "A":

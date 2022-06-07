@@ -4,8 +4,8 @@ import com.preservica.cli.model.Course;
 import com.preservica.cli.service.CourseService;
 import com.preservica.cli.service.StudentService;
 import com.preservica.cli.service.UserInputService;
+import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
  * Course Menu Controller.
  */
 @Component
+@Log
 public class CourseMenuController {
     @Autowired
     private UserInputService userInputService;
@@ -31,16 +32,13 @@ public class CourseMenuController {
     public void run() {
         printMenu();
         String userInput = userInputService.readStringInputFromConsole();
-        switch (userInput) {
-            case "n":
+        switch (userInput.toUpperCase()) {
             case "N":
                 save();
                 break;
-            case "l":
             case "L":
                 listAll();
                 break;
-            case "b":
             case "B":
                 return;
             default:

@@ -31,24 +31,19 @@ public class StudentsMenuController {
     public void run() {
         printMenu();
         String userInput = userInputService.readStringInputFromConsole();
-        switch (userInput) {
-            case "n":
+        switch (userInput.toUpperCase()) {
             case "N":
                 save();
                 break;
-            case "l":
             case "L":
                 listAll();
                 break;
-            case "a":
             case "A":
                 enrollCourse();
                 break;
-            case "r":
             case "R":
                 removeCourse();
                 break;
-            case "b":
             case "B":
                 return;
             default:
@@ -84,19 +79,18 @@ public class StudentsMenuController {
         }
         System.out.println("Enter Student age: ");
         Integer age = userInputService.readIntegerInputFromConsole(18, 45);
-
         System.out.println("Save student details? : Y/N");
         boolean canSave = userInputService.readConfirmationFromConsole();
         if (canSave) {
             Student student = Student.builder()
                     .name(studentName)
-                    .age(Integer.valueOf(age))
+                    .age(age)
                     .build();
             studentService.save(student);
-            System.out.println(String.format("Student information saved successfully : %s", student.getName()));
+            System.out.printf("Details of student %s saved successfully!%n", student.getName());
             return;
         }
-        System.out.println("Student information not saved.");
+        System.out.println("Failed or unable to save student information!");
     }
 
     private void listAll() {
@@ -110,40 +104,37 @@ public class StudentsMenuController {
     }
 
     private void enrollCourse() {
-        System.out.println("Enter Student id: ");
-        Integer studentId = userInputService.readIntegerInputFromConsole();
-        Optional<Student> optionalStudent = studentService.findById(studentId);
+        Optional<Student> optionalStudent = readIdAndGetStudentDetails();
         if (optionalStudent.isEmpty()) {
-            System.out.println("Student id not found!");
+            System.out.println("Student details not found!");
             return;
         }
-        System.out.println("Enter course id: ");
-        Integer courseId = userInputService.readIntegerInputFromConsole();
-        Optional<Course> optionalCourse = courseService.findById(courseId);
+
+        Optional<Course> optionalCourse = readIdGetCourseDetails();
         if (optionalCourse.isEmpty()) {
-            System.out.println("Course id not found!");
+            System.out.println("Course details not found!");
             return;
         }
 
         Course course = optionalCourse.get();
         if (courseService.isCourseFullyEnrolled(course)) {
-            System.out.println(String.format("Maximum students enrolled for the course - %s!", course.getName()));
+            System.out.printf("Maximum students enrolled for the course - %s!%n", course.getName());
             return;
         }
         Student student = optionalStudent.get();
         boolean enrolled = studentService.enrollCourse(student.getId(), course.getId());
         if (enrolled) {
-            System.out.println(String.format("Student %s is enrolled for the course %s successfully!", student.getName(), course.getName()));
+            System.out.printf("Student %s is enrolled for the course %s successfully!%n", student.getName(), course.getName());
             return;
         }
-        System.out.println(String.format("Student %s is not enrolled for the course %s!", student.getName(), course.getName()));
+        System.out.printf("Failed or unable to enroll Student %s for the course %s!%n", student.getName(), course.getName());
     }
 
 
     private void removeCourse() {
-        Optional<Student> optionalStudent = readStudentIdGetDetails();
+        Optional<Student> optionalStudent = readIdAndGetStudentDetails();
         if (optionalStudent.isEmpty()) {
-            System.out.println("Student id not found!");
+            System.out.println("Student details not found!");
             return;
         }
         Student student = optionalStudent.get();
@@ -151,27 +142,31 @@ public class StudentsMenuController {
             System.out.println("Student not enrolled for any courses!");
             return;
         }
-        Optional<Course> optionalCourse = readCourseIdGetDetails();
+        Optional<Course> optionalCourse = readIdGetCourseDetails();
         if (optionalCourse.isEmpty()) {
             System.out.println("Course id not found!");
             return;
         }
         Course course = optionalCourse.get();
-        boolean courseRemoved = studentService.removeCourse(student.getId(), course.getId());
-        if (courseRemoved) {
-            System.out.println(String.format("Student %s is removed from the course %s successfully!", student.getName(), course.getName()));
+        if (CollectionUtils.isEmpty(course.getEnrolledStudents())) {
+            System.out.println("Student id not found in the courses!");
             return;
         }
-        System.out.println(String.format("Student %s is not removed from the course %s!", student.getName(), course.getName()));
+        boolean courseRemoved = studentService.removeCourse(student.getId(), course.getId());
+        if (courseRemoved) {
+            System.out.printf("Student %s is removed from the course %s successfully!%n", student.getName(), course.getName());
+            return;
+        }
+        System.out.printf("Failed or unable to remove Student %s from the course %s!%n", student.getName(), course.getName());
     }
 
-    private Optional<Student> readStudentIdGetDetails() {
+    private Optional<Student> readIdAndGetStudentDetails() {
         System.out.println("Enter Student id: ");
         Integer studentId = userInputService.readIntegerInputFromConsole();
         return studentService.findById(studentId);
     }
 
-    private Optional<Course> readCourseIdGetDetails() {
+    private Optional<Course> readIdGetCourseDetails() {
         System.out.println("Enter Student id: ");
         Integer courseId = userInputService.readIntegerInputFromConsole();
         return courseService.findById(courseId);

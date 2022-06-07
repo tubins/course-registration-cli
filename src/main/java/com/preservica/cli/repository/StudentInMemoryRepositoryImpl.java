@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 /** Implementation class for @{@link StudentRepository}. */
 @Service
 public class StudentInMemoryRepositoryImpl implements StudentRepository {
-    private static AtomicInteger atomicInteger = new AtomicInteger();
-    private static Map<Integer, Student> studentStore = new HashMap<>();
+    private static final AtomicInteger atomicInteger = new AtomicInteger();
+    private static final Map<Integer, Student> studentStore = new HashMap<>();
     /** {@inheritDoc} */
     @Override
     public void save(final Student student) {

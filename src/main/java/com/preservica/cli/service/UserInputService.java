@@ -1,12 +1,15 @@
 package com.preservica.cli.service;
 
-/** Input service. */
+/**
+ * Input service.
+ */
 public interface UserInputService {
 
-     boolean readConfirmationFromConsole();
+    boolean readConfirmationFromConsole();
 
-     String readStringInputFromConsole();
+    String readStringInputFromConsole();
 
-     Integer readIntegerInputFromConsole();
-     Integer readIntegerInputFromConsole(Integer minRange, Integer maxRange);
+    Integer readIntegerInputFromConsole();
+
+    Integer readIntegerInputFromConsole(Integer minRange, Integer maxRange);
 }

@@ -5,7 +5,9 @@ import com.preservica.cli.model.Student;
 import java.util.List;
 import java.util.Optional;
 
-/** StudentRepository. */
+/**
+ * StudentRepository.
+ */
 public interface StudentRepository {
     /**
      * Save student.
@@ -13,12 +15,14 @@ public interface StudentRepository {
      * @param student student to save.
      */
     void save(Student student);
+
     /**
      * List all students.
      *
      * @return list of all students.
      */
     List<Student> findAll();
+
     /**
      * Find a student by its Id.
      *
@@ -26,6 +30,7 @@ public interface StudentRepository {
      * @return matching student or else optional null.
      */
     Optional<Student> findById(Integer id);
+
     /**
      * Update student.
      *

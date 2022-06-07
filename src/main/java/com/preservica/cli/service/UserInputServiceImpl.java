@@ -11,15 +11,24 @@ import java.util.Scanner;
 @Service
 public class UserInputServiceImpl implements UserInputService {
     private final Scanner scanner;
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     public UserInputServiceImpl() {
         this.scanner = new Scanner(System.in);
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     private String readUserInput() {
         return scanner.nextLine();
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean readConfirmationFromConsole() {
         String confirmation = readUserInput();
@@ -43,7 +52,10 @@ public class UserInputServiceImpl implements UserInputService {
         System.out.println("Invalid input!");
         return readStringInputFromConsole();
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer readIntegerInputFromConsole() {
         String userInput = readUserInput();
@@ -54,7 +66,10 @@ public class UserInputServiceImpl implements UserInputService {
         }
         return readIntegerInputFromConsole();
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Integer readIntegerInputFromConsole(final Integer minRange, final Integer maxRange) {
         System.out.println(String.format("Please enter an integer value between %s and %s", minRange, maxRange));

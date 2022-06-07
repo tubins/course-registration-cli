@@ -23,7 +23,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Manage loading and saving of inmemory data. */
+/**
+ * Manage loading and saving of inmemory data.
+ */
 @Component
 @Order(1)
 public class DataStoreManager implements CommandLineRunner {
@@ -36,7 +38,9 @@ public class DataStoreManager implements CommandLineRunner {
     @Value("${data.store.file.name}")
     private String storeFileName;
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void run(String... args) throws Exception {
 
@@ -46,7 +50,7 @@ public class DataStoreManager implements CommandLineRunner {
         File storeFile = new File(url.getFile());
 
         BufferedReader bufferedReader = new BufferedReader(new FileReader(storeFile));
-        if(bufferedReader.readLine() == null) {
+        if (bufferedReader.readLine() == null) {
             loadInitialData();
             bufferedReader.close();
             return;
@@ -63,7 +67,9 @@ public class DataStoreManager implements CommandLineRunner {
 
     }
 
-    /** Save data before on exit. */
+    /**
+     * Save data before on exit.
+     */
     @PreDestroy
     private void saveData() throws IOException {
         System.out.println("Saving data.");

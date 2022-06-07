@@ -5,7 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/** Students model. */
+/**
+ * Students model.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

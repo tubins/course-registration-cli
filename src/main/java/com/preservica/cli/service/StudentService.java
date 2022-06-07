@@ -43,6 +43,7 @@ public interface StudentService {
 
     /**
      * Find use by id.
+     *
      * @param id Id to match with.
      * @return student information.
      */

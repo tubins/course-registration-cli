@@ -18,17 +18,26 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private CourseService courseService;
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(final Student student) {
         studentRepository.save(student);
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Student> listAll() {
         return studentRepository.findAll();
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean enrollCourse(final Integer studentId, final Integer courseId) {
         Optional<Student> optionalStudent = findById(studentId);
@@ -45,7 +54,7 @@ public class StudentServiceImpl implements StudentService {
         if (CollectionUtils.isEmpty(course.getEnrolledStudents())) {
             course.setEnrolledStudents(new ArrayList<>());
         }
-        if(courseService.isCourseFullyEnrolled(course)) {
+        if (courseService.isCourseFullyEnrolled(course)) {
             return false;
         }
         course.getEnrolledStudents().add(student.getId());
@@ -53,7 +62,10 @@ public class StudentServiceImpl implements StudentService {
         courseService.update(course);
         return true;
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean removeCourse(final Integer studentId, final Integer courseId) {
         Optional<Student> optionalStudent = studentRepository.findById(studentId);
@@ -79,7 +91,10 @@ public class StudentServiceImpl implements StudentService {
         courseService.update(course);
         return true;
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Student> findById(final Integer id) {
         return studentRepository.findById(id);

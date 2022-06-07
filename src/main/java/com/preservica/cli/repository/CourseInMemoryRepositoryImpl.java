@@ -6,29 +6,42 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/** Implementation class for @{@link CourseRepository}. */
+/**
+ * Implementation class for @{@link CourseRepository}.
+ */
 @Service
 public class CourseInMemoryRepositoryImpl implements CourseRepository {
     private static final AtomicInteger atomicInteger = new AtomicInteger();
     private static final Map<Integer, Course> courseStore = new HashMap<>();
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(final Course course) {
         course.setId(atomicInteger.incrementAndGet());
         courseStore.put(course.getId(), course);
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Course> findAll() {
         return new ArrayList<>(courseStore.values());
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Course> findById(final Integer id) {
         return Optional.ofNullable(courseStore.get(id));
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(final Course course) {
         courseStore.put(course.getId(), course);

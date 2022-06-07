@@ -5,7 +5,9 @@ import com.preservica.cli.model.Course;
 import java.util.List;
 import java.util.Optional;
 
-/** CourseRepository. */
+/**
+ * CourseRepository.
+ */
 public interface CourseRepository {
     /**
      * Save course.

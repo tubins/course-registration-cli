@@ -16,27 +16,42 @@ import java.util.Optional;
 public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseRepository courseRepository;
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(final Course course) {
         courseRepository.save(course);
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Course> listAll() {
         return courseRepository.findAll();
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Course> findById(final Integer id) {
         return courseRepository.findById(id);
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(final Course course) {
         courseRepository.update(course);
     }
-    /** {@inheritDoc} */
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isCourseFullyEnrolled(final Course course) {
         if (course == null) {

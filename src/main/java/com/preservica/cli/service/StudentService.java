@@ -1,6 +1,10 @@
 package com.preservica.cli.service;
 
 public interface StudentService {
-    void saveStudent();
+    void save();
     void listAll();
+
+    void enrollCourse();
+
+    void removeCourse();
 }

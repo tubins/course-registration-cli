@@ -1,17 +1,18 @@
 package com.preservica.cli.controller;
 
+import com.preservica.cli.service.CourseService;
 import com.preservica.cli.service.StudentService;
 import com.preservica.cli.service.UserInputService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StudentsMenuController {
+public class CourseMenuController {
     private final UserInputService userInputService;
-    private final StudentService studentService;
+    private final CourseService courseService;
 
-    public StudentsMenuController(UserInputService userInputService, StudentService studentService) {
+    public CourseMenuController(UserInputService userInputService,  CourseService courseService) {
         this.userInputService = userInputService;
-        this.studentService = studentService;
+        this.courseService = courseService;
     }
 
     public void run() {
@@ -20,19 +21,13 @@ public class StudentsMenuController {
         switch (userInput) {
             case "n":
             case "N":
-                studentService.save();
+                System.out.println("New Course option selected.");
+                courseService.save();
                 break;
             case "l":
             case "L":
-                studentService.listAll();
-                break;
-            case "a":
-            case "A":
-                studentService.enrollCourse();
-                break;
-            case "r":
-            case "R":
-                studentService.removeCourse();
+                System.out.println("List course Option selected.");
+                courseService.listAll();
                 break;
             case "b":
             case "B":
@@ -45,13 +40,11 @@ public class StudentsMenuController {
 
     private void printMenu() {
         System.out.println(
-                "\nStudents menu\n" +
+                "\nCourse menu\n" +
                         "Please choose an option from the menu by selecting the first letter.\n" +
                         "====== Menu ======\n" +
-                        "N. New Students\n" +
-                        "L. List Students\n" +
-                        "A. Assign Course\n" +
-                        "R. Remove Course\n" +
+                        "N. New Courses\n" +
+                        "L. List Courses\n" +
                         "B. Return to main menu\n" +
                         "==================\n" +
                         "Enter here : "

@@ -1,18 +1,23 @@
 package com.preservica.cli.controller;
 
+import com.preservica.cli.model.Student;
 import com.preservica.cli.service.UserInputService;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(2)
 public class MainMenuController implements CommandLineRunner {
 
     private final UserInputService userInputService;
     private final StudentsMenuController studentsMenuController;
+    private final CourseMenuController courseMenuController;
 
-    public MainMenuController(UserInputService userInputService, StudentsMenuController studentsMenuController) {
+    public MainMenuController(UserInputService userInputService, StudentsMenuController studentsMenuController, CourseMenuController courseMenuController) {
         this.userInputService = userInputService;
         this.studentsMenuController = studentsMenuController;
+        this.courseMenuController = courseMenuController;
     }
 
     @Override
@@ -32,6 +37,7 @@ public class MainMenuController implements CommandLineRunner {
             case "c":
             case "C":
                 System.out.println("Courses option selected.");
+                courseMenuController.run();
                 break;
             case "e":
             case "E":

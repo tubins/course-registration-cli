@@ -45,6 +45,9 @@ public class StudentServiceImpl implements StudentService {
         if (CollectionUtils.isEmpty(course.getEnrolledStudents())) {
             course.setEnrolledStudents(new ArrayList<>());
         }
+        if(courseService.isCourseFullyEnrolled(course)) {
+            return false;
+        }
         course.getEnrolledStudents().add(student.getId());
         studentRepository.update(student);
         courseService.update(course);
@@ -68,9 +71,6 @@ public class StudentServiceImpl implements StudentService {
         }
         Course course = optionalCourse.get();
         if (CollectionUtils.isEmpty(course.getEnrolledStudents())) {
-            return false;
-        }
-        if(courseService.isCourseFullyEnrolled(course)) {
             return false;
         }
         student.setCourseId(null);

@@ -144,7 +144,7 @@ public class StudentsMenuController {
         }
         Optional<Course> optionalCourse = readIdGetCourseDetails();
         if (optionalCourse.isEmpty()) {
-            System.out.println("Course id not found!");
+            System.out.println("Course details not found!");
             return;
         }
         Course course = optionalCourse.get();
@@ -167,7 +167,7 @@ public class StudentsMenuController {
     }
 
     private Optional<Course> readIdGetCourseDetails() {
-        System.out.println("Enter Student id: ");
+        System.out.println("Enter Course id: ");
         Integer courseId = userInputService.readIntegerInputFromConsole();
         return courseService.findById(courseId);
     }

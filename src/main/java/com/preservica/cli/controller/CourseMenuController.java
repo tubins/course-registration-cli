@@ -102,7 +102,6 @@ public class CourseMenuController {
                         .stream()
                         .forEach(System.out::println);
             }
-            System.out.println("=====================");
         });
     }
 }

@@ -1,10 +1,19 @@
 package com.preservica.cli.service;
 
+import com.preservica.cli.model.Student;
+
+import java.util.List;
+import java.util.Optional;
+
 public interface StudentService {
-    void save();
-    void listAll();
+    void save(Student student);
 
-    void enrollCourse();
+    List<Student> listAll();
 
-    void removeCourse();
+    boolean enrollCourse(Integer studentId, Integer courseId);
+
+    boolean removeCourse(Integer studentId, Integer courseId);
+
+    Optional<Student> findById(Integer id);
+
 }

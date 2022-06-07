@@ -23,6 +23,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Manage loading and saving of inmemory data. */
 @Component
 @Order(1)
 public class DataStoreManager implements CommandLineRunner {
@@ -35,6 +36,7 @@ public class DataStoreManager implements CommandLineRunner {
     @Value("${data.store.file.name}")
     private String storeFileName;
 
+    /** {@inheritDoc} */
     @Override
     public void run(String... args) throws Exception {
 
@@ -61,6 +63,7 @@ public class DataStoreManager implements CommandLineRunner {
 
     }
 
+    /** Save data before on exit. */
     @PreDestroy
     private void saveData() throws IOException {
         System.out.println("Saving data.");
@@ -74,6 +77,7 @@ public class DataStoreManager implements CommandLineRunner {
         File file = new File(url.getFile());
         mapper.writeValue(file, dataStore);
         System.out.println("Data saved successfully.");
+        System.out.println("Application stopped successfully.");
     }
 
     private void loadInitialData() {

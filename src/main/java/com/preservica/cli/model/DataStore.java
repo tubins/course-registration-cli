@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.util.List;
 
+/** Model to represent DataStore. */
 @Data
 @Getter
 @Setter

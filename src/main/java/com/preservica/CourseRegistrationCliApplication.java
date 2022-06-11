@@ -11,11 +11,12 @@ public class CourseRegistrationCliApplication implements CommandLineRunner
 {
     @Autowired
     private MainMenuController mainMenuController;
+
     public static void main(String[] args) {
         SpringApplication.run(CourseRegistrationCliApplication.class, args);
     }
     @Override
     public void run(String... args) throws Exception {
-        mainMenuController.run();
+       // mainMenuController.run();
     }
 }
